@@ -1,10 +1,20 @@
+import React, { useState, useMemo } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import ActiveScreen from './components/ActiveScreen';
+import ModeContext from './components/ModeContext';
 
 export default function App() {
+  const [mode, setMode] = useState<null | number>(null);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <ModeContext.Provider
+        value={useMemo(() => ({ mode, switchMode: setMode }), [mode])}
+      >
+        <ActiveScreen activeMode={mode} />
+      </ModeContext.Provider>
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +23,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
 });
