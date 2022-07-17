@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
-import modes from '../helpers/data';
+import { modes } from '../helpers/data';
 import ModeContext from './ModeContext';
 
 const StartScreen = () => {

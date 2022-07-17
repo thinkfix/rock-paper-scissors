@@ -1,10 +1,6 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import modes from '../helpers/data';
-
-interface IContext {
-  mode: null | number;
-  switchMode: Dispatch<SetStateAction<number | null>>;
-}
+import React from 'react';
+import { modes } from '../helpers/data';
+import { IContext } from '../helpers/interfaces';
 
 const ModeContext = React.createContext<IContext>({
   mode: modes.onePlayerMode,

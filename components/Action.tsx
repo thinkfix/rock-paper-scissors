@@ -1,14 +1,26 @@
 import { Pressable, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useState, FC } from 'react';
+import { signData } from '../helpers/data';
+import { IAction } from '../helpers/interfaces';
+import { CLICK_TIMES, LOADER_TIMEOUT } from '../helpers/constants';
 
-interface IAction {
-  children: JSX.Element[];
-  onAction: () => void;
-}
+const Action: FC<IAction> = ({ children, onAction, setLoading }) => {
+  const [counter, setCounter] = useState(1);
 
-const Action = ({ children, onAction }: IAction) => {
+  const pressHandler = () => {
+    if (counter % CLICK_TIMES === 0) {
+      setLoading(true);
+      const rand = Math.floor(Math.random() * signData.length);
+      setTimeout(() => {
+        setLoading(false);
+        onAction(signData[rand]);
+      }, LOADER_TIMEOUT);
+    }
+    setCounter(prev => prev + 1);
+  };
+
   return (
-    <Pressable style={styles.press} onPress={onAction}>
+    <Pressable style={styles.press} onPress={pressHandler}>
       {children}
     </Pressable>
   );

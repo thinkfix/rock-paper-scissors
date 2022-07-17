@@ -1,10 +1,9 @@
 import React from 'react';
+
 import StartScreen from './StartScreen';
 import PlayScreen from './PlayScreen';
 
-interface IActiveScreen {
-  activeMode: null | number;
-}
+import { IActiveScreen } from '../helpers/interfaces';
 
 const ActiveScreen = ({ activeMode }: IActiveScreen) => {
   if (activeMode !== null) {
