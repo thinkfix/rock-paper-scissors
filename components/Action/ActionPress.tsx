@@ -1,10 +1,10 @@
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, Vibration } from 'react-native';
 import React, { useState, FC } from 'react';
-import { signData } from '../helpers/data';
-import { IAction } from '../helpers/interfaces';
-import { CLICK_TIMES, LOADER_TIMEOUT } from '../helpers/constants';
+import { signData } from '../../helpers/data';
+import { IAction } from '../../helpers/interfaces';
+import { CLICK_TIMES, LOADER_TIMEOUT } from '../../helpers/constants';
 
-const Action: FC<IAction> = ({ children, onAction, setLoading }) => {
+const ActionPress: FC<IAction> = ({ children, onAction, setLoading }) => {
   const [counter, setCounter] = useState(1);
 
   const pressHandler = () => {
@@ -14,6 +14,7 @@ const Action: FC<IAction> = ({ children, onAction, setLoading }) => {
       setTimeout(() => {
         setLoading(false);
         onAction(signData[rand]);
+        Vibration.vibrate();
       }, LOADER_TIMEOUT);
     }
     setCounter(prev => prev + 1);
@@ -34,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Action;
+export default ActionPress;
